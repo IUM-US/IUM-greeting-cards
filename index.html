@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قوالب بطاقات التهنئة | الجامعة الإسلامية بمنيسوتا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4DB8E8;
+            --primary-light: #7DD3FC;
+            --primary-dark: #0EA5E9;
+            --primary-darker: #0284C7;
+            --accent: #F59E0B;
+            --accent-light: #FCD34D;
+            --bg: #F0F9FF;
+            --card-bg: #FFFFFF;
+            --text: #0F172A;
+            --text-light: #475569;
+            --border: #E2E8F0;
+            --shadow: 0 4px 20px rgba(0,0,0,0.06);
+            --shadow-hover: 0 8px 30px rgba(0,0,0,0.1);
+            --footer-bg: #0F172A;
+            --footer-text: #94A3B8;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: visible;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .title-section h1 {
+            color: var(--primary-darker);
+            font-size: 1.5em;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .title-section .subtitle {
+            color: var(--text-light);
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h2 {
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Categories - 3 Big Buttons */
+        .categories-section {
+            max-width: 900px;
+            margin: -40px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .category-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .category-card h3 {
+            font-size: 1.3em;
+            color: var(--text);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            color: var(--text-light);
+            font-size: 0.95em;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+            margin-top: 12px;
+        }
+
+        .badge-active {
+            background: #D1FAE5;
+            color: #059669;
+        }
+
+        .badge-soon {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        /* Templates Section (for Eid Al-Adha) */
+        .templates-section {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .templates-section.active {
+            display: block;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8em;
+            color: var(--primary-darker);
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1em;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            border-color: var(--primary);
+            background: var(--bg);
+        }
+
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .template-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary-light);
+        }
+
+        .template-card.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(77, 184, 232, 0.2);
+        }
+
+        .template-preview {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-darker);
+            font-size: 1.1em;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .template-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .template-info {
+            padding: 20px;
+        }
+
+        .template-info h3 {
+            font-size: 1.15em;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .template-info p {
+            color: var(--text-light);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .select-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 0 0 14px 14px;
+        }
+
+        .select-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Coming Soon Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            font-size: 1.5em;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .modal p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .modal-close {
+            padding: 12px 35px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Editor Section */
+        .editor-section {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .editor-section.active {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+        }
+
+        .editor-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 10px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .editor-title h2 {
+            color: var(--primary-darker);
+            font-size: 1.6em;
+        }
+
+        .controls-panel {
+            background: var(--bg);
+            border-radius: 15px;
+            padding: 25px;
+            height: fit-content;
+        }
+
+        .control-group {
+            margin-bottom: 25px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--text);
+            font-size: 0.95em;
+        }
+
+        .control-group input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .control-group input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(77, 184, 232, 0.15);
+        }
+
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .color-picker-wrapper input[type="color"] {
+            width: 60px;
+            height: 50px;
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .color-value {
+            font-family: monospace;
+            color: var(--text-light);
+            font-size: 0.9em;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .slider-container {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+        }
+
+        .slider-container input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, var(--primary-light), var(--primary));
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider-container input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .range-value {
+            text-align: center;
+            margin-top: 10px;
+            color: var(--primary-darker);
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .font-select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1em;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+
+        .font-select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(77, 184, 232, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg);
+            border-color: var(--primary);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Canvas Area */
+        .canvas-area {
+            background: var(--bg);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 500px;
+        }
+
+        .canvas-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            background: white;
+        }
+
+        #cardCanvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            cursor: move;
+        }
+
+        .canvas-hint {
+            margin-top: 15px;
+            color: var(--text-light);
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 0;
+            margin-top: 80px;
+        }
+
+        .footer-top {
+            background: var(--primary);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-logo-large {
+            width: 120px;
+            height: 120px;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            margin: 0 auto 20px;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .footer-top h3 {
+            color: white;
+            font-size: 1.6em;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .footer-top p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.1em;
+        }
+
+        .footer-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        .footer-bottom {
+            background: #020617;
+            padding: 30px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-info {
+            text-align: right;
+        }
+
+        .footer-info h4 {
+            color: white;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .footer-info p {
+            color: var(--footer-text);
+            font-size: 0.9em;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            background: #0F172A;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--footer-text);
+            font-size: 0.85em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .hero h2 {
+                font-size: 1.8em;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .templates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-section.active {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-info {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo" style="background: transparent; box-shadow: none; border-radius: 0; width: 80px; height: 80px;">
+                    <img src="logo-header.png" alt="شعار الجامعة الإسلامية بمنيسوتا" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;">
+                </div>
+                <div class="title-section">
+                    <h1>قوالب بطاقات التهنئة</h1>
+                    <p class="subtitle">الجامعة الإسلامية بمنيسوتا - أمريكا | الفرع الرئيس - IUM</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>🎉 صمم بطاقتك الخاصة</h2>
+        <p>اختر المناسبة، اختر التصميم المفضل، اكتب اسمك، وقم بتخصيص البطاقة</p>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="categories-grid">
+            <!-- Ramadan - Coming Soon -->
+            <div class="category-card" onclick="showComingSoon('رمضان')">
+                <span class="category-icon">🌙</span>
+                <h3>بطاقة تهنئة بحلول شهر رمضان</h3>
+                <p>تهنئة خاصة بمناسبة حلول شهر رمضان المبارك</p>
+                <span class="category-badge badge-soon">قريباً</span>
+            </div>
+
+            <!-- Eid Al-Fitr - Coming Soon -->
+            <div class="category-card" onclick="showComingSoon('عيد الفطر')">
+                <span class="category-icon">✨</span>
+                <h3>بطاقة تهنئة بعيد الفطر المبارك</h3>
+                <p>تهنئة بمناسبة عيد الفطر المبارك</p>
+                <span class="category-badge badge-soon">قريباً</span>
+            </div>
+
+            <!-- Eid Al-Adha - Active -->
+            <div class="category-card" onclick="showTemplates()">
+                <span class="category-icon">🐑</span>
+                <h3>بطاقة تهنئة بعيد الأضحى المبارك</h3>
+                <p>اختر تصميمك وقم بتخصيص بطاقة عيد الأضحى</p>
+                <span class="category-badge badge-active">متاح الآن</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section (Hidden by default) -->
+    <section class="templates-section" id="templatesSection">
+        <button class="back-btn" onclick="backToCategories()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            العودة للمناسبات
+        </button>
+
+        <div class="section-header">
+            <h2>🐑 اختر تصميم عيد الأضحى</h2>
+            <p>اختر التصميم المفضل وقم بتخصيصه باسمك</p>
+        </div>
+
+        <div class="templates-grid" id="templatesGrid">
+            <div class="template-card" data-template="adha1">
+                <div class="template-preview">
+                    <img src="template1.jpg" alt="تصميم عيد الأضحى 1" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <div class="template-info">
+                    <h3>تصميم عيد الأضحى 1</h3>
+                    <p>تصميم أنيق بمناسبة عيد الأضحى المبارك</p>
+                </div>
+                <button class="select-btn" onclick="selectTemplate('adha1')">اختيار هذا التصميم</button>
+            </div>
+
+            <div class="template-card" data-template="adha2">
+                <div class="template-preview">
+                    <img src="template2.jpg" alt="تصميم عيد الأضحى 2" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <div class="template-info">
+                    <h3>تصميم عيد الأضحى 2</h3>
+                    <p>تصميم فاخر بألوان عيد الأضحى</p>
+                </div>
+                <button class="select-btn" onclick="selectTemplate('adha2')">اختيار هذا التصميم</button>
+            </div>
+
+            <div class="template-card" data-template="adha3">
+                <div class="template-preview">
+                    <img src="template3.jpg" alt="تصميم عيد الأضحى 3" style="width:100%;height:100%;object-fit:cover;">
+                </div>
+                <div class="template-info">
+                    <h3>تصميم عيد الأضحى 3</h3>
+                    <p>تصميم كلاسيكي أنيق</p>
+                </div>
+                <button class="select-btn" onclick="selectTemplate('adha3')">اختيار هذا التصميم</button>
+            </div>
+
+            <div class="template-card" data-template="adha4">
+                <div class="template-preview">
+                    <span>🎨 تصميم 4</span>
+                </div>
+                <div class="template-info">
+                    <h3>تصميم عيد الأضحى 4</h3>
+                    <p>تصميم عصري ومميز</p>
+                </div>
+                <button class="select-btn" onclick="selectTemplate('adha4')">اختيار هذا التصميم</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editor Section -->
+    <div class="editor-section" id="editorSection">
+        <div class="editor-title">
+            <h2>✏️ تخصيص البطاقة</h2>
+        </div>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <label>الاسم على البطاقة</label>
+                <input type="text" id="nameInput" placeholder="اكتب الاسم هنا..." value="" oninput="updateCard()">
+            </div>
+
+            <div class="control-group">
+                <label>لون الخط</label>
+                <div class="color-picker-wrapper">
+                    <input type="color" id="colorInput" value="#0F172A" onchange="updateCard()">
+                    <span class="color-value" id="colorValue">#0F172A</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>حجم الخط</label>
+                <div class="slider-container">
+                    <input type="range" id="sizeInput" min="20" max="120" value="50" oninput="updateCard()">
+                    <div class="range-value" id="sizeValue">50px</div>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>نوع الخط</label>
+                <select class="font-select" id="fontInput" onchange="updateCard()">
+                    <option value="Tajawal">Tajawal (عربي)</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="'Times New Roman'">Times New Roman</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-success" onclick="downloadCard()">
+                    ⬇️ تحميل البطاقة
+                </button>
+                <button class="btn btn-secondary" onclick="backToTemplates()">
+                    ← العودة للتصاميم
+                </button>
+            </div>
+        </div>
+
+        <div class="canvas-area">
+            <div class="canvas-wrapper">
+                <canvas id="cardCanvas"></canvas>
+            </div>
+            <div class="canvas-hint">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="#4DB8E8">
+                    <path d="M13 7h-2v4L8.5 9.5 7 11l4.5 4.5L16 11l-1.5-1.5L13 11V7z"/>
+                </svg>
+                اسحب النص لتحديد مكانه على البطاقة
+            </div>
+        </div>
+    </div>
+
+    <!-- Coming Soon Modal -->
+    <div class="modal-overlay" id="comingSoonModal" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-icon">⏳</div>
+            <h3 id="modalTitle">قريباً</h3>
+            <p id="modalText">سيتم إضافة هذه البطاقات قريباً</p>
+            <button class="modal-close" onclick="closeModal()">حسناً</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-logo-large" style="background: transparent; box-shadow: none; width: 120px; height: 120px;">
+                <img src="logo-footer.png" alt="شعار الجامعة" style="width: 100%; height: 100%; object-fit: contain;">
+            </div>
+            <h3>الجامعة الإسلامية بمنيسوتا - أمريكا</h3>
+            <p>الفرع الرئيس - IUM</p>
+            <div class="footer-divider"></div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>تواصل معنا</h4>
+                    <p>للتسجيل والاستفسارات، تواصل معنا عبر واتساب</p>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://wa.me/962778989770" class="social-link" title="واتساب" target="_blank" style="background: #25D366;">
+                        <svg viewBox="0 0 24 24" fill="white">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/groups/914114025325635" class="social-link" title="فيسبوك" target="_blank">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/ium_usa_online" class="social-link" title="تويتر" target="_blank">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            جميع الحقوق محفوظة © 2026 - الجامعة الإسلامية بمنيسوتا - أمريكا | الفرع الرئيس - IUM
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let canvas = document.getElementById('cardCanvas');
+        let ctx = canvas.getContext('2d');
+        let bgImage = new Image();
+        let textX = 0;
+        let textY = 0;
+        let isDragging = false;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+        let currentTemplate = '';
+
+        // Template configurations
+        const templates = {
+            adha1: { 
+                name: 'تصميم الكعبة الكريمة', 
+                src: 'template1.jpg',
+                defaultColor: '#1E3A5F',
+                defaultSize: 45,
+                defaultY: 0.75
+            },
+            adha2: { 
+                name: 'تصميم الحج والكعبة', 
+                src: 'template2.jpg',
+                defaultColor: '#1E3A5F',
+                defaultSize: 45,
+                defaultY: 0.72
+            },
+            adha3: { 
+                name: 'تصميم الخط العربي', 
+                src: 'template3.jpg',
+                defaultColor: '#0F172A',
+                defaultSize: 42,
+                defaultY: 0.78
+            }
+        };
+
+        // Show Coming Soon Modal
+        function showComingSoon(occasion) {
+            document.getElementById('modalTitle').textContent = occasion + ' - قريباً';
+            document.getElementById('modalText').textContent = 'سيتم إضافة بطاقات ' + occasion + ' قريباً. تابعنا للمزيد!';
+            document.getElementById('comingSoonModal').classList.add('active');
+        }
+
+        function closeModal(event) {
+            if (!event || event.target === document.getElementById('comingSoonModal') || event.target.tagName === 'BUTTON') {
+                document.getElementById('comingSoonModal').classList.remove('active');
+            }
+        }
+
+        // Show Templates Section
+        function showTemplates() {
+            document.querySelector('.categories-section').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.getElementById('templatesSection').classList.add('active');
+            document.getElementById('templatesSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function backToCategories() {
+            document.querySelector('.categories-section').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.getElementById('templatesSection').classList.remove('active');
+            document.getElementById('editorSection').classList.remove('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function selectTemplate(templateId) {
+            currentTemplate = templateId;
+            const template = templates[templateId];
+
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.querySelector(`[data-template="${templateId}"]`).classList.add('selected');
+
+            document.getElementById('templatesSection').classList.remove('active');
+            document.getElementById('editorSection').classList.add('active');
+            document.getElementById('editorSection').scrollIntoView({ behavior: 'smooth' });
+
+            document.getElementById('colorInput').value = template.defaultColor;
+            document.getElementById('sizeInput').value = template.defaultSize;
+            document.getElementById('colorValue').textContent = template.defaultColor;
+            document.getElementById('sizeValue').textContent = template.defaultSize + 'px';
+
+            setupCanvas(template);
+        }
+
+        function backToTemplates() {
+            document.getElementById('editorSection').classList.remove('active');
+            document.getElementById('templatesSection').classList.add('active');
+            document.getElementById('templatesSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setupCanvas(template) {
+            canvas.width = 800;
+            canvas.height = 600;
+
+            textX = canvas.width / 2;
+            textY = canvas.height * template.defaultY;
+
+            if (template.src) {
+                bgImage.onload = function() {
+                    canvas.width = bgImage.width;
+                    canvas.height = bgImage.height;
+                    textX = canvas.width / 2;
+                    textY = canvas.height * template.defaultY;
+                    updateCard();
+                };
+                bgImage.src = template.src;
+            } else {
+                drawPlaceholder(template);
+                updateCard();
+            }
+        }
+
+        function drawPlaceholder(template) {
+            const w = canvas.width;
+            const h = canvas.height;
+
+            const gradient = ctx.createLinearGradient(0, 0, w, h);
+            gradient.addColorStop(0, '#FEF3C7');
+            gradient.addColorStop(0.5, '#FDE68A');
+            gradient.addColorStop(1, '#FCD34D');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.strokeStyle = 'rgba(146, 64, 14, 0.2)';
+            ctx.lineWidth = 2;
+
+            const cornerSize = 80;
+            ctx.beginPath();
+            ctx.moveTo(20, 60); ctx.lineTo(20, 20); ctx.lineTo(60, 20);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(w-60, 20); ctx.lineTo(w-20, 20); ctx.lineTo(w-20, 60);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(20, h-60); ctx.lineTo(20, h-20); ctx.lineTo(60, h-20);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(w-60, h-20); ctx.lineTo(w-20, h-20); ctx.lineTo(w-20, h-60);
+            ctx.stroke();
+
+            ctx.fillStyle = 'rgba(146, 64, 14, 0.1)';
+            for (let i = 0; i < 5; i++) {
+                ctx.beginPath();
+                ctx.arc(w/2, h/2, 50 + i * 30, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            ctx.fillStyle = '#92400E';
+            ctx.font = 'bold 28px Tajawal';
+            ctx.textAlign = 'center';
+            ctx.fillText(template.name, w/2, h/2 - 80);
+
+            ctx.fillStyle = '#B45309';
+            ctx.font = '18px Tajawal';
+            ctx.fillText('(سيتم استبدال هذا بالتصميم الفعلي)', w/2, h/2 - 40);
+
+            ctx.fillStyle = 'rgba(146, 64, 14, 0.15)';
+            ctx.beginPath();
+            ctx.arc(w/2, h/2 + 80, 60, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#92400E';
+            ctx.font = 'bold 24px Tajawal';
+            ctx.fillText('IUM', w/2, h/2 + 90);
+        }
+
+        function updateCard() {
+            if (!currentTemplate) return;
+
+            const name = document.getElementById('nameInput').value;
+            const color = document.getElementById('colorInput').value;
+            const size = document.getElementById('sizeInput').value;
+            const font = document.getElementById('fontInput').value;
+
+            document.getElementById('colorValue').textContent = color;
+            document.getElementById('sizeValue').textContent = size + 'px';
+
+            const template = templates[currentTemplate];
+            if (bgImage.src && bgImage.complete && bgImage.naturalWidth > 0) {
+                ctx.drawImage(bgImage, 0, 0);
+            } else {
+                drawPlaceholder(template);
+            }
+
+            if (name) {
+                ctx.font = `bold ${size}px ${font}`;
+                ctx.fillStyle = color;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.lineWidth = parseInt(size) / 8;
+                ctx.lineJoin = 'round';
+                ctx.strokeText(name, textX, textY);
+
+                ctx.fillText(name, textX, textY);
+            }
+        }
+
+        // Drag functionality
+        canvas.addEventListener('mousedown', startDrag);
+        canvas.addEventListener('mousemove', drag);
+        canvas.addEventListener('mouseup', endDrag);
+        canvas.addEventListener('mouseleave', endDrag);
+
+        canvas.addEventListener('touchstart', handleTouch, { passive: false });
+        canvas.addEventListener('touchmove', handleTouch, { passive: false });
+        canvas.addEventListener('touchend', endDrag);
+
+        function startDrag(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            const mouseX = (e.clientX - rect.left) * scaleX;
+            const mouseY = (e.clientY - rect.top) * scaleY;
+
+            const name = document.getElementById('nameInput').value;
+            const size = document.getElementById('sizeInput').value;
+            const font = document.getElementById('fontInput').value;
+
+            if (!name) return;
+
+            ctx.font = `bold ${size}px ${font}`;
+            const metrics = ctx.measureText(name);
+            const textWidth = metrics.width;
+            const textHeight = parseInt(size);
+
+            if (mouseX >= textX - textWidth/2 - 40 && 
+                mouseX <= textX + textWidth/2 + 40 &&
+                mouseY >= textY - textHeight/2 - 40 && 
+                mouseY <= textY + textHeight/2 + 40) {
+                isDragging = true;
+                dragOffsetX = mouseX - textX;
+                dragOffsetY = mouseY - textY;
+                canvas.style.cursor = 'grabbing';
+            }
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            textX = (e.clientX - rect.left) * scaleX - dragOffsetX;
+            textY = (e.clientY - rect.top) * scaleY - dragOffsetY;
+
+            textX = Math.max(50, Math.min(canvas.width - 50, textX));
+            textY = Math.max(50, Math.min(canvas.height - 50, textY));
+
+            updateCard();
+        }
+
+        function endDrag() {
+            isDragging = false;
+            canvas.style.cursor = 'move';
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            if (!touch) return;
+            const mouseEvent = new MouseEvent(
+                e.type === 'touchstart' ? 'mousedown' : 
+                e.type === 'touchmove' ? 'mousemove' : 'mouseup',
+                {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                }
+            );
+            canvas.dispatchEvent(mouseEvent);
+        }
+
+        function downloadCard() {
+            const name = document.getElementById('nameInput').value;
+            if (!name) {
+                alert('الرجاء كتابة الاسم أولاً');
+                document.getElementById('nameInput').focus();
+                return;
+            }
+
+            const link = document.createElement('a');
+            link.download = `IUM-عيد-الاضحى-${name}.png`;
+            link.href = canvas.toDataURL('image/png', 1.0);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
